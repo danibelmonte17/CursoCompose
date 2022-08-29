@@ -1,6 +1,12 @@
 package com.danibelmonte.marvelcompose.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -24,6 +30,14 @@ fun NavigationComposable(navController: NavHostController) {
         charactersNavGraph(navController)
         comicsNavGraph(navController)
         eventsNavGraph(navController)
+        composable(NavCommand.ContentType(Feature.SETTINGS)){
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
+            ){
+                Text("Settings", style = MaterialTheme.typography.h3)
+            }
+        }
     }
 }
 

@@ -9,7 +9,7 @@ import com.danibelmonte.marvelcompose.data.repositories.CharactersRepository
 
 @Composable
 fun CharactersScreen(onClick: (Character) -> Unit){
-    var characterState by rememberSaveable{ mutableStateOf(emptyList<Character>()) }
+    var characterState by remember{ mutableStateOf(emptyList<Character>()) }
     LaunchedEffect(Unit){
        characterState = CharactersRepository.get()
     }

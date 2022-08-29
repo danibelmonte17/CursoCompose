@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ComicsScreen(onClick: (Comic) -> Unit) {
-    var comicsState by rememberSaveable { mutableStateOf(emptyList<Comic>()) }
+    var comicsState by remember { mutableStateOf(emptyList<Comic>()) }
     LaunchedEffect(Unit) {
         comicsState = ComicsRepository.get()
     }

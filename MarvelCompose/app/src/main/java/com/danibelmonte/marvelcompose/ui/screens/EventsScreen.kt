@@ -9,7 +9,7 @@ import com.danibelmonte.marvelcompose.data.repositories.EventsRepository
 
 @Composable
 fun EventsScreen(onClick: (Event) -> Unit){
-    var eventsState by rememberSaveable { mutableStateOf(emptyList<Event>()) }
+    var eventsState by remember { mutableStateOf(emptyList<Event>()) }
     LaunchedEffect(Unit){
         eventsState = EventsRepository.get()
     }
