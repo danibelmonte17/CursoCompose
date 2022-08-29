@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MarvelCompose</string>
+    <string name="characters">Characters</string>
+    <string name="comics">Comics</string>
+    <string name="events">Events</string>
+
+    <string name="comic">Comic</string>
+    <string name="magazine">Magazine</string>
+    <string name="trade_paperback">Trade PaperBack</string>
+    <string name="hardcover">Hardcover</string>
+    <string name="digest">Digest</string>
+    <string name="graphics_novel">Graphics Novel</string>
+    <string name="digital_comics">Digital Comics</string>
+    <string name="infinite_comics">Infinite Comics</string>
+</resources>
