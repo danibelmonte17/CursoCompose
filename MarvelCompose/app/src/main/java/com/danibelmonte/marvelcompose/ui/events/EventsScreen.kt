@@ -1,9 +1,8 @@
-package com.danibelmonte.marvelcompose.ui.screens
+package com.danibelmonte.marvelcompose.ui.events
 
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import com.danibelmonte.marvelcompose.common.ui.MarvelItemDetailScreen
-import com.danibelmonte.marvelcompose.common.ui.MarvelScreenItems
+import com.danibelmonte.marvelcompose.ui.common.MarvelItemDetailScreen
+import com.danibelmonte.marvelcompose.ui.common.MarvelScreenItems
 import com.danibelmonte.marvelcompose.data.entities.Event
 import com.danibelmonte.marvelcompose.data.repositories.EventsRepository
 
@@ -14,6 +13,7 @@ fun EventsScreen(onClick: (Event) -> Unit){
         eventsState = EventsRepository.get()
     }
     MarvelScreenItems(
+        true,
         items = eventsState,
         onClick = onClick
     )
@@ -26,6 +26,6 @@ fun EventsDetailsScreen(itemId: Int, onBackAction: () -> Unit){
         eventState = EventsRepository.find(itemId)
     }
     eventState?.let {
-        MarvelItemDetailScreen(marvelItem = it, onBackAction)
+        MarvelItemDetailScreen(marvelItem = it, onBackAction = onBackAction)
     }
 }

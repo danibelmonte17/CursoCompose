@@ -1,22 +1,16 @@
-package com.danibelmonte.marvelcompose.ui.screens
+package com.danibelmonte.marvelcompose.ui.comics
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.danibelmonte.marvelcompose.R
-import com.danibelmonte.marvelcompose.common.ui.MarvelItemDetailScreen
-import com.danibelmonte.marvelcompose.common.ui.MarvelItemsList
-import com.danibelmonte.marvelcompose.common.ui.MarvelScreenItems
+import com.danibelmonte.marvelcompose.ui.common.MarvelItemDetailScreen
+import com.danibelmonte.marvelcompose.ui.common.MarvelItemsList
 import com.danibelmonte.marvelcompose.data.entities.Comic
 import com.danibelmonte.marvelcompose.data.repositories.ComicsRepository
 import com.google.accompanist.pager.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -36,7 +30,7 @@ fun ComicsScreen(onClick: (Comic) -> Unit) {
             count = formats.size,
             state = pagerState
         ) {
-            MarvelItemsList(comicsState, onClick)
+            MarvelItemsList(false, comicsState, onClick)
         }
     }
 }
@@ -76,6 +70,6 @@ fun ComicsDetailsScreen(itemId: Int, onBackAction: () -> Unit) {
         comicState = ComicsRepository.find(itemId)
     }
     comicState?.let {
-        MarvelItemDetailScreen(marvelItem = it, onBackAction)
+        MarvelItemDetailScreen(marvelItem = it, onBackAction = onBackAction)
     }
 }

@@ -12,14 +12,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.danibelmonte.marvelcompose.ui.screens.ComicsDetailsScreen
-import com.danibelmonte.marvelcompose.ui.screens.ComicsScreen
-import com.danibelmonte.marvelcompose.ui.screens.EventsDetailsScreen
-import com.danibelmonte.marvelcompose.ui.screens.EventsScreen
-import com.danibelmonte.marvelcompose.ui.screens.characters.CharacterDetailScreen
-import com.danibelmonte.marvelcompose.ui.screens.characters.CharactersScreen
+import com.danibelmonte.marvelcompose.ui.comics.ComicsDetailsScreen
+import com.danibelmonte.marvelcompose.ui.comics.ComicsScreen
+import com.danibelmonte.marvelcompose.ui.events.EventsDetailsScreen
+import com.danibelmonte.marvelcompose.ui.events.EventsScreen
+import com.danibelmonte.marvelcompose.ui.characters.CharacterDetailScreen
+import com.danibelmonte.marvelcompose.ui.characters.CharactersScreen
 
 @Composable
 fun NavigationComposable(navController: NavHostController) {
@@ -54,7 +53,7 @@ private fun NavGraphBuilder.charactersNavGraph(navController: NavHostController)
             }
         }
         composable(NavCommand.ContentDetails(Feature.CHARACTERS)) {
-            CharacterDetailScreen(it.findArg(NavArgs.ItemId)) {
+            CharacterDetailScreen {
                 navController.popBackStack()
             }
         }

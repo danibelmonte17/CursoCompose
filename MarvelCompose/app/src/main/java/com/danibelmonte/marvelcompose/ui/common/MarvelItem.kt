@@ -1,4 +1,4 @@
-package com.danibelmonte.marvelcompose.common.ui
+package com.danibelmonte.marvelcompose.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

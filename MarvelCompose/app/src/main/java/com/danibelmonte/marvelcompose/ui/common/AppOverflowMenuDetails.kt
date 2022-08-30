@@ -1,4 +1,4 @@
-package com.danibelmonte.marvelcompose.ui.screens.characterdetail
+package com.danibelmonte.marvelcompose.ui.common
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons

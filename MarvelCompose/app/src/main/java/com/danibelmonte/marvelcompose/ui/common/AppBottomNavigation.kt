@@ -1,4 +1,4 @@
-package com.danibelmonte.marvelcompose.common.ui
+package com.danibelmonte.marvelcompose.ui.common
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
