@@ -73,7 +73,7 @@ private fun NavGraphBuilder.comicsNavGraph(navController: NavHostController) {
             }
         }
         composable(NavCommand.ContentDetails(Feature.COMICS)){
-            ComicsDetailsScreen(it.findArg(NavArgs.ItemId)) {
+            ComicsDetailsScreen {
                 navController.popBackStack()
             }
         }
@@ -93,7 +93,7 @@ private fun NavGraphBuilder.eventsNavGraph(navController: NavHostController) {
             }
         }
         composable(NavCommand.ContentDetails(Feature.EVENTS)){
-            EventsDetailsScreen(it.findArg(NavArgs.ItemId)) {
+            EventsDetailsScreen {
                 navController.popBackStack()
             }
         }

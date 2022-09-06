@@ -1,15 +1,15 @@
-package com.danibelmonte.marvelcompose.ui.characters
+package com.danibelmonte.marvelcompose.ui.comics
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.danibelmonte.marvelcompose.data.entities.Character
-import com.danibelmonte.marvelcompose.data.repositories.CharactersRepository
+import com.danibelmonte.marvelcompose.data.entities.Comic
+import com.danibelmonte.marvelcompose.data.repositories.ComicsRepository
 import com.danibelmonte.marvelcompose.navigation.NavArgs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class CharacterDetailsViewModel(
+class ComicDetailsViewModel(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -20,13 +20,14 @@ class CharacterDetailsViewModel(
     init {
         viewModelScope.launch {
             state.value = UiState(loading = true)
-            state.value = UiState(character = CharactersRepository.find(id))
+            state.value = UiState(comic = ComicsRepository.find(id))
         }
     }
 
     data class UiState(
         val loading: Boolean = false,
-        val character: Character? = null
+        val comic: Comic? = null
     )
+
 
 }

@@ -1,31 +1,29 @@
 package com.danibelmonte.marvelcompose.ui.events
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.danibelmonte.marvelcompose.data.entities.Event
 import com.danibelmonte.marvelcompose.ui.common.MarvelItemDetailScreen
 import com.danibelmonte.marvelcompose.ui.common.MarvelScreenItems
-import com.danibelmonte.marvelcompose.data.entities.Event
-import com.danibelmonte.marvelcompose.data.repositories.EventsRepository
 
 @Composable
-fun EventsScreen(onClick: (Event) -> Unit){
-    var eventsState by remember { mutableStateOf(emptyList<Event>()) }
-    LaunchedEffect(Unit){
-        eventsState = EventsRepository.get()
-    }
+fun EventsScreen(viewModel: EventsViewModel = viewModel(), onClick: (Event) -> Unit){
+    val state by viewModel.state.collectAsState()
     MarvelScreenItems(
-        true,
-        items = eventsState,
+        loading = state.loading,
+        items = state.items,
         onClick = onClick
     )
 }
 
 @Composable
-fun EventsDetailsScreen(itemId: Int, onBackAction: () -> Unit){
-    var eventState by remember { mutableStateOf<Event?>(null) }
-    LaunchedEffect(Unit){
-        eventState = EventsRepository.find(itemId)
-    }
-    eventState?.let {
-        MarvelItemDetailScreen(marvelItem = it, onBackAction = onBackAction)
-    }
+fun EventsDetailsScreen(viewModel: EventsDetailsViewModel = viewModel(),  onBackAction: () -> Unit){
+    val state by viewModel.state.collectAsState()
+    MarvelItemDetailScreen(
+        loading = state.loading,
+        marvelItem = state.event,
+        onBackAction = onBackAction
+    )
 }
