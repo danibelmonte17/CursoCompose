@@ -3,11 +3,13 @@ package com.danibelmonte.marvelcompose.ui.comics
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.Either
 import com.danibelmonte.marvelcompose.data.entities.Comic
 import com.danibelmonte.marvelcompose.data.repositories.ComicsRepository
 import com.danibelmonte.marvelcompose.navigation.NavArgs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import com.danibelmonte.marvelcompose.data.entities.Result
 
 class ComicDetailsViewModel(
     savedStateHandle: SavedStateHandle
@@ -26,7 +28,7 @@ class ComicDetailsViewModel(
 
     data class UiState(
         val loading: Boolean = false,
-        val comic: Comic? = null
+        val comic: Result<Comic?> = Either.Right(null)
     )
 
 

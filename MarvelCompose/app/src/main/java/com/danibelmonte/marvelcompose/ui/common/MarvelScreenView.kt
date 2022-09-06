@@ -15,10 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.danibelmonte.marvelcompose.MarvelScreen
 import com.danibelmonte.marvelcompose.data.entities.MarvelItem
+import com.danibelmonte.marvelcompose.data.entities.Result
 
 @Composable
-fun <T : MarvelItem> MarvelScreenItems(loading: Boolean, items: List<T>, onClick: (T) -> Unit) {
-    MarvelItemsList(loading, items, onClick)
+fun <T : MarvelItem> MarvelScreenItems(loading: Boolean, items: Result<List<T>>, onClick: (T) -> Unit) {
+    items.fold({ ErrorMessage(it)}){
+        MarvelItemsList(loading, it, onClick)
+    }
+
 }
 
 @Composable

@@ -2,10 +2,11 @@ package com.danibelmonte.marvelcompose.data.repositories
 
 import com.danibelmonte.marvelcompose.data.entities.Event
 import com.danibelmonte.marvelcompose.data.network.ApiClient
+import com.danibelmonte.marvelcompose.data.entities.Result
 
 object EventsRepository : Repository<Event>() {
 
-    suspend fun get(): List<Event> = super.get {
+    suspend fun get(): Result<List<Event>> = super.get {
         ApiClient
             .eventsService
             .getEvents(0, 100)
@@ -14,7 +15,7 @@ object EventsRepository : Repository<Event>() {
             .map { it.asEvent() }
     }
 
-    suspend fun find(id: Int): Event = super.find(
+    suspend fun find(id: Int): Result<Event> = super.find(
         id,
         findActionRemote = {
             ApiClient

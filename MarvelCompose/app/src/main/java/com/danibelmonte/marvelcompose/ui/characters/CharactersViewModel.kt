@@ -2,10 +2,13 @@ package com.danibelmonte.marvelcompose.ui.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.right
 import com.danibelmonte.marvelcompose.data.entities.Character
 import com.danibelmonte.marvelcompose.data.repositories.CharactersRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import com.danibelmonte.marvelcompose.data.entities.Result
+
 
 class CharactersViewModel : ViewModel() {
 
@@ -20,7 +23,7 @@ class CharactersViewModel : ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
-        val items: List<Character> = emptyList()
+        val items: Result<List<Character>> = emptyList<Character>().right()
     )
 
 }

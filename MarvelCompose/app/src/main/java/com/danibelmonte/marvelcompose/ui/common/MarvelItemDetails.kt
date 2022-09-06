@@ -20,38 +20,41 @@ import coil.compose.rememberAsyncImagePainter
 import com.danibelmonte.marvelcompose.data.entities.MarvelItem
 import com.danibelmonte.marvelcompose.data.entities.Reference
 import com.danibelmonte.marvelcompose.data.entities.ReferenceList
+import com.danibelmonte.marvelcompose.data.entities.Result
 
 
 @Composable
-fun MarvelItemDetailScreen(loading: Boolean = false, marvelItem: MarvelItem?, onBackAction: () -> Unit) {
+fun MarvelItemDetailScreen(loading: Boolean = false, marvelItem: Result<MarvelItem?>, onBackAction: () -> Unit) {
 
     if(loading){
         CircularProgressIndicator()
     }
 
-    if(marvelItem!=null){
-        MarvelItemDetailsScafold(
-            marvelItem,
-            onBackAction
-        ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .fillMaxWidth()
-            ) {
-                item {
-                    Header(marvelItem)
-                }
-                section(Icons.Default.Book, "Series", marvelItem.references.first { it.type == ReferenceList.Type.SERIES }.references)
-                marvelItem.references.firstOrNull { it.type == ReferenceList.Type.EVENT }?.let {
-                    section(Icons.Default.Book, "Events", it.references)
-                }
-                marvelItem.references.firstOrNull { it.type == ReferenceList.Type.COMIC }?.let {
-                    section(Icons.Default.Book, "Comics", it.references)
-                }
-                section(Icons.Default.Book, "Stories", marvelItem.references.first { it.type == ReferenceList.Type.STORY }.references)
-                item {
-                    Spacer(modifier = Modifier.height(56.dp))
+    marvelItem.fold({ ErrorMessage(error = it)}){ item ->
+        if(item!=null){
+            MarvelItemDetailsScafold(
+                item,
+                onBackAction
+            ) { paddingValues ->
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .fillMaxWidth()
+                ) {
+                    item {
+                        Header(item)
+                    }
+                    section(Icons.Default.Book, "Series", item.references.first { it.type == ReferenceList.Type.SERIES }.references)
+                    item.references.firstOrNull { it.type == ReferenceList.Type.EVENT }?.let {
+                        section(Icons.Default.Book, "Events", it.references)
+                    }
+                    item.references.firstOrNull { it.type == ReferenceList.Type.COMIC }?.let {
+                        section(Icons.Default.Book, "Comics", it.references)
+                    }
+                    section(Icons.Default.Book, "Stories", item.references.first { it.type == ReferenceList.Type.STORY }.references)
+                    item {
+                        Spacer(modifier = Modifier.height(56.dp))
+                    }
                 }
             }
         }
